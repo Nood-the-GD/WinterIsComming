@@ -6,6 +6,7 @@
   <Project Path="AYellowpaper.SerializedCollections.csproj" />
   <Project Path="UniTask.Linq.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
+  <Project Path="Game.csproj" />
   <Project Path="UniTask.Addressables.csproj" />
   <Project Path="DOTween.Modules.csproj" />
   <Project Path="VInspector.csproj" />
@@ -13,8 +14,7 @@
   <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
   <Project Path="UniTask.TextMeshPro.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
-  <Project Path="Game.csproj" />
   <Project Path="UniTask.Editor.csproj" />
-  <Project Path="UniTask.DOTween.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="UniTask.DOTween.csproj" />
 </Solution>
