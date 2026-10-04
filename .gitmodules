@@ -1,0 +1,3 @@
+[submodule "GameCore"]
+	path = GameCore
+	url = https://github.com/Nood-the-GD/GameCore.git
