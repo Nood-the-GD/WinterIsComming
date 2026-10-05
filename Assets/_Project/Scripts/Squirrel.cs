@@ -26,10 +26,17 @@ public class Squirrel : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (_currentAcorn >= _maxAcorn) return;
-        if(collision.gameObject.tag == "Acorn")
+        if (collision.gameObject.tag == "Acorn")
         {
             _currentAcorn++;
             Destroy(collision.gameObject);
+            OnCollectAcorn?.Invoke();
+        }
+
+        if (collision.gameObject.tag == "MainTree")
+        {
+            MessageBus.Publish<OnAcornUnload>(new OnAcornUnload { AcornNumber = CurrentAcorn });
+            _currentAcorn = 0;
             OnCollectAcorn?.Invoke();
         }
     }

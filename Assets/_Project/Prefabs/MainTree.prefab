@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7134970110090556818}
   - component: {fileID: 8768610398012217677}
-  - component: {fileID: 3179283215088546697}
   - component: {fileID: 2889165271479426622}
   m_Layer: 0
   m_Name: MainTree
-  m_TagString: Untagged
+  m_TagString: MainTree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,25 +92,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3179283215088546697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6850258218073010289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5688e4077eeff42b5a1b80d082c8b31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tree
-  _acornPref: {fileID: 4404531614893695502, guid: 1d957fe0df6b4454f95e4f296f56061b, type: 3}
-  _data: {fileID: 11400000, guid: 64cff5e1a603b4e8e9a8c533389df207, type: 2}
-  _spawnPosition:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!61 &2889165271479426622
 BoxCollider2D:
   m_ObjectHideFlags: 0
