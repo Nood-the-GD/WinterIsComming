@@ -80,7 +80,7 @@ public class FieldOfView : MonoBehaviour
 
     public void SetDirection(Vector3 direction)
     {
-        _startingAngle = VectorUtil.GetAngleFromVectorFloat(direction) - _fov / 2f;
+        _startingAngle = VectorUtil.GetAngleFromVectorFloat(direction) + _fov / 2f;
     }
 
 }

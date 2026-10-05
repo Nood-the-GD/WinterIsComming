@@ -5,6 +5,7 @@ public class Fox : MonoBehaviour
 {
     [SerializeField] private FieldOfView _fov;
     [SerializeField] private LayerMask _blockLayerMask;
+    [SerializeField] private Vector2 _limitX, _limitY;
     private Rigidbody2D _rb;
     private Vector3 _moveTargetPoint;
     private float _walkSpeed = 2f;
@@ -21,13 +22,15 @@ public class Fox : MonoBehaviour
 
     void Update()
     {
-        _fov.SetOrigin(this.transform.position);   
-        if(IsMoveValid())
+        _fov.SetOrigin(this.transform.position);
+        if (IsMoveValid())
         {
             var direction = (_moveTargetPoint - this.transform.position).normalized;
             _rb.linearVelocity = direction * _walkSpeed;
             _fov.SetDirection(direction);
-            if(IsSeeSquirrel())
+            Debug.DrawLine(this.transform.position, _moveTargetPoint);
+            Debug.DrawRay(this.transform.position, direction, Color.red);
+            if (IsSeeSquirrel())
             {
                 _rb.linearVelocity = direction * _runSpeed;
             }
@@ -40,7 +43,13 @@ public class Fox : MonoBehaviour
 
     private bool IsMoveValid()
     {
-        if(Vector3.Distance(_moveTargetPoint, this.transform.position) < 0.2f)
+        if (_moveTargetPoint.x < _limitX.x || _moveTargetPoint.x > _limitX.y || _moveTargetPoint.y < _limitY.x || _moveTargetPoint.y > _limitY.y)
+        {
+            // Out of zone
+            return false;
+        }
+
+        if (Vector3.Distance(_moveTargetPoint, this.transform.position) < 0.2f)
         {
             return false;
         }
