@@ -9,15 +9,17 @@ public class Fox : MonoBehaviour
     {
         Walk,
         Run,
-        SeeTarget,
+        ChaseTarget,
         LooseTarget
     }
 
     [SerializeField] private FieldOfView _fov;
     [SerializeField] private LayerMask _blockLayerMask;
     [SerializeField] private Vector2 _limitX, _limitY;
+    [SerializeField] private Transform _questionMark;
     private Rigidbody2D _rb;
     private Vector3 _moveTargetPoint;
+    private Transform _targetTransform;
     private float _walkSpeed = 1f;
     private float _runSpeed = 2f;
     private float _currentSpeed;
@@ -58,15 +60,18 @@ public class Fox : MonoBehaviour
         {
             case FoxStage.Walk:
                 _currentSpeed = _walkSpeed;
+                _questionMark.gameObject.SetActive(false);
                 break;
             case FoxStage.Run:
-            case FoxStage.SeeTarget:
+            case FoxStage.ChaseTarget:
                 _currentSpeed = _runSpeed;
+                _questionMark.gameObject.SetActive(false);
                 break;
             case FoxStage.LooseTarget:
                 // Stop a while then find another target
                 _currentSpeed = 0;
                 _rb.linearVelocity = Vector3.zero;
+                _questionMark.gameObject.SetActive(true);
                 LooseTargetCountDown();
                 break;
         }
@@ -97,15 +102,24 @@ public class Fox : MonoBehaviour
             return false;
         }
 
+        if (_targetTransform != null && _currentStage == FoxStage.ChaseTarget)
+        {
+            if (Vector3.Distance(_targetTransform.position, this.transform.position) <= 0.2f)
+            {
+                MessageBus.Publish<OnFoxBiteSquirrel>(new());
+            }
+        }
+
         if (Vector3.Distance(_moveTargetPoint, this.transform.position) < 0.2f)
         {
             return false;
         }
+
         var distance = Vector3.Distance(_moveTargetPoint, this.transform.position);
         if (Physics2D.Raycast(origin: this.transform.position, direction: (_moveTargetPoint - transform.position).normalized, distance, layerMask: _blockLayerMask))
         {
             _rayColor = Color.red;
-            if (_currentStage == FoxStage.SeeTarget)
+            if (_currentStage == FoxStage.ChaseTarget)
             {
                 _currentStage = FoxStage.LooseTarget;
             }
@@ -122,8 +136,18 @@ public class Fox : MonoBehaviour
 
     private void Handler_OnTargetDetected(Transform transform)
     {
+        if (transform == null)
+        {
+            if (_currentStage == FoxStage.ChaseTarget)
+            {
+                _currentStage = FoxStage.LooseTarget;
+            }
+            return;
+        }
+
+        _targetTransform = transform;
         _moveTargetPoint = transform.position;
         _currentSpeed = _runSpeed;
-        _currentStage = FoxStage.SeeTarget;
+        _currentStage = FoxStage.ChaseTarget;
     }
 }

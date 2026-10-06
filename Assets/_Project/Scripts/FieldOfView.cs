@@ -40,6 +40,7 @@ public class FieldOfView : MonoBehaviour
 
         int vertexIndex = 1;
         int triangleIndex = 0;
+        bool detectTarget = false;
         for (int i = 0; i <= _rayCount; i++)
         {
             var direction = VectorUtil.GetVectorFromAngle(_angle);
@@ -61,8 +62,8 @@ public class FieldOfView : MonoBehaviour
                     if ((thisLayerMak & _targetLayerMask) != 0 && j == 0)
                     {
                         // Hit Target
-                        Debug.Log("Hit Target: ");
                         OnTargetDetected?.Invoke(ray.transform);
+                        detectTarget = true;
                     }
                     else
                     {
@@ -84,6 +85,11 @@ public class FieldOfView : MonoBehaviour
 
             vertexIndex++;
             _angle -= _angleIncrease;
+        }
+
+        if (detectTarget == false)
+        {
+            OnTargetDetected?.Invoke(null);
         }
 
         mesh.vertices = vertices;
