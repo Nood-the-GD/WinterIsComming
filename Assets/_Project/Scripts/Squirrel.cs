@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Squirrel : MonoBehaviour
 {
+    [SerializeField] private GameSetting _setting;
     [SerializeField] private InputActionReference _move;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private float _speed = 5;
@@ -12,7 +13,7 @@ public class Squirrel : MonoBehaviour
 
     private Vector3 _moveDirection;
     private int _currentAcorn;
-    private int _maxAcorn = 5;
+    private int _maxAcorn => _setting.MaxAcornCanCarry;
 
     public int CurrentAcorn => _currentAcorn;
     public int MaxAcorn => _maxAcorn;
@@ -25,9 +26,9 @@ public class Squirrel : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_currentAcorn >= _maxAcorn) return;
         if (collision.gameObject.tag == "Acorn")
         {
+            if (_currentAcorn >= _maxAcorn) return;
             _currentAcorn++;
             Destroy(collision.gameObject);
             OnCollectAcorn?.Invoke();

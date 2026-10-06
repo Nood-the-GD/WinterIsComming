@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3c416948e33451ea2dec66e10f8d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Squirrel
+  _setting: {fileID: 11400000, guid: f3d664d0baf334fbc80bf36fba451744, type: 2}
   _move: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _rb: {fileID: 5513230979289115782}
   _speed: 5
