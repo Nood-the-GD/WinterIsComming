@@ -1,9 +1,13 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class FieldOfView : MonoBehaviour
 {
+    public Action<Transform> OnTargetDetected;
     [SerializeField] private LayerMask _blockLayerMask;
+    [SerializeField] private LayerMask _targetLayerMask;
 
     private float _fov = 90f;
     private Vector3 _origin = Vector3.zero;
@@ -16,6 +20,7 @@ public class FieldOfView : MonoBehaviour
     Vector3[] vertices;
     Vector2[] uv;
     int[] triangles;
+
 
     void Start()
     {
@@ -39,8 +44,8 @@ public class FieldOfView : MonoBehaviour
         {
             var direction = VectorUtil.GetVectorFromAngle(_angle);
             Vector3 vertex;
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(_origin, direction, _viewDistance, _blockLayerMask);
-            if (raycastHit2D.collider == null)
+            RaycastHit2D[] raycastHit2DAll = Physics2D.RaycastAll(_origin, direction, _viewDistance, _blockLayerMask | _targetLayerMask);
+            if (raycastHit2DAll.Length == 0)
             {
                 // No hit
                 vertex = _origin + direction * _viewDistance;
@@ -48,7 +53,22 @@ public class FieldOfView : MonoBehaviour
             else
             {
                 // Hit
-                vertex = raycastHit2D.point;
+                vertex = _origin + direction * _viewDistance;
+                for (int j = 0; j < raycastHit2DAll.Length; j++)
+                {
+                    var ray = raycastHit2DAll[j];
+                    var thisLayerMak = 1 << ray.collider.gameObject.layer;
+                    if ((thisLayerMak & _targetLayerMask) != 0 && j == 0)
+                    {
+                        // Hit Target
+                        Debug.Log("Hit Target: ");
+                        OnTargetDetected?.Invoke(ray.transform);
+                    }
+                    else
+                    {
+                        vertex = ray.point;
+                    }
+                }
             }
 
             vertices[vertexIndex] = vertex;
