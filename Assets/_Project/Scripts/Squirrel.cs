@@ -4,10 +4,11 @@ using UnityEngine.InputSystem;
 
 public class Squirrel : MonoBehaviour
 {
-    [SerializeField] private GameSetting _setting;
+    [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private InputActionReference _move;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private float _speed = 5;
+    private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
 
     public Action OnCollectAcorn;
 
@@ -30,6 +31,10 @@ public class Squirrel : MonoBehaviour
         {
             if (_currentAcorn >= _maxAcorn) return;
             _currentAcorn++;
+            if (collision.TryGetComponent<Acorn>(out Acorn acorn))
+            {
+                acorn.OnAcornCollect?.Invoke();
+            }
             Destroy(collision.gameObject);
             OnCollectAcorn?.Invoke();
         }

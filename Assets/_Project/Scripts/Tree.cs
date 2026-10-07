@@ -42,6 +42,10 @@ public class Tree : MonoBehaviour
         var newAcorn = Instantiate(_acornPref, this.transform);
         newAcorn.transform.position = spawnPos.position;
         newAcorn.transform.localScale = Vector3.zero;
+        newAcorn.GetComponent<Acorn>().OnAcornCollect = () =>
+        {
+            _currentAcorn--;
+        };
 
         Sequence acornSequence = DOTween.Sequence();
         acornSequence.Append(newAcorn.transform.DOScale(1, 1));
