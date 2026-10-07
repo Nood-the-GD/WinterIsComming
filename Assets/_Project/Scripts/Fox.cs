@@ -25,6 +25,7 @@ public class Fox : MonoBehaviour
     private float _currentSpeed;
     private Color _rayColor;
     private FoxStage _currentStage = FoxStage.Walk;
+    private bool _canMove = true;
 
     #region LooseTarget
     private float _looseTargetCountTime = 3;
@@ -39,11 +40,35 @@ public class Fox : MonoBehaviour
 
     void Start()
     {
+        MessageBus.Subscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
+        MessageBus.Subscribe<OnOutOfTime>(Handler_OnOutOfTime);
+        MessageBus.Subscribe<OnGameWin>(Handler_OnGameWin);
         _fov.OnTargetDetected += Handler_OnTargetDetected;
+    }
+
+    private void Handler_OnGameWin(OnGameWin win)
+    {
+        _canMove = false;
+    }
+
+    private void Handler_OnOutOfTime(OnOutOfTime time)
+    {
+        _canMove = false;
+    }
+
+    private void Handler_OnFoxBiteSquirrel(OnFoxBiteSquirrel squirrel)
+    {
+        _canMove = false;
     }
 
     void Update()
     {
+        if (_canMove == false)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         if (_looseTargetTimer > 0)
         {
             _looseTargetTimer -= Time.deltaTime;

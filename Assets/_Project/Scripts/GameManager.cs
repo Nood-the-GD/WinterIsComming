@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         {
             // Game Win
             Debug.Log("Game Win");
+            MessageBus.Publish<OnGameWin>(new());
         }
     }
 

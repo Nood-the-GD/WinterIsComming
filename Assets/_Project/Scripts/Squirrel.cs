@@ -15,12 +15,40 @@ public class Squirrel : MonoBehaviour
     private Vector3 _moveDirection;
     private int _currentAcorn;
     private int _maxAcorn => _setting.MaxAcornCanCarry;
+    private bool _canMove = true;
 
     public int CurrentAcorn => _currentAcorn;
     public int MaxAcorn => _maxAcorn;
 
+    void Start()
+    {
+        MessageBus.Subscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
+        MessageBus.Subscribe<OnGameWin>(Handler_OnGameWin);
+        MessageBus.Subscribe<OnOutOfTime>(Handler_OnOutOfTime);
+    }
+
+    private void Handler_OnOutOfTime(OnOutOfTime time)
+    {
+        _canMove = false;
+    }
+
+    private void Handler_OnGameWin(OnGameWin win)
+    {
+        _canMove = false;
+    }
+
+    private void Handler_OnFoxBiteSquirrel(OnFoxBiteSquirrel squirrel)
+    {
+        _canMove = false;
+    }
+
     void Update()
     {
+        if (_canMove == false)
+        {
+            _moveDirection = Vector2.zero;
+            return;
+        }
         _moveDirection = _move.action.ReadValue<Vector2>();
         _moveDirection = Vector3.Normalize(_moveDirection);
     }
