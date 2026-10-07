@@ -9,13 +9,13 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask _blockLayerMask;
     [SerializeField] private LayerMask _targetLayerMask;
 
-    private float _fov = 90f;
+    private float _fov = 60f;
     private Vector3 _origin = Vector3.zero;
     private float _angle = 0;
     private float _startingAngle = 0;
     private int _rayCount = 15;
     private float _angleIncrease;
-    private float _viewDistance = 5f;
+    private float _viewDistance = 3f;
     private Mesh mesh;
     Vector3[] vertices;
     Vector2[] uv;
