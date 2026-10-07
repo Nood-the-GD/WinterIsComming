@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameSetting _setting;
+    [SerializeField] private GlobalSetting _globalSetting;
     private float _limitTimeInSecond => _setting.MaxTimeInSecond;
     private int _requireAcorn => _setting.RequireAcorn;
     private float _timer;
     private int _currentAcorn;
-    
+    private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
+
 
     void Start()
     {

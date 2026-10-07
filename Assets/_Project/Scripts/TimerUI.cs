@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TimerUI : MonoBehaviour
 {
-    [SerializeField] private GameSetting _setting;
+    [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private TextMeshProUGUI _text;
+    private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
     private float _time;
 
     void Start()

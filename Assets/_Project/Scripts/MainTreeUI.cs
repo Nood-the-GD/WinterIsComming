@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MainTreeUI : MonoBehaviour
 {
-    [SerializeField] private GameSetting _setting;
+    [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private TextMeshPro _text;
+    private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
     private int _currentAcorn;
 
     void Start()
