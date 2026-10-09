@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameSetting_Easy
   m_EditorClassIdentifier: Game::GameSetting
   MaxAcornCanCarry: 5
-  RequireAcorn: 90
-  MaxTimeInSecond: 180
+  RequireAcorn: 20
+  MaxTimeInSecond: 120
   NumberOfFox: 1
