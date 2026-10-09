@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
         MessageBus.Subscribe<OnAcornUnload>(Handler_OnAcornUnload);
     }
 
+    void OnDestroy()
+    {
+        MessageBus.Unsubscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
+        MessageBus.Unsubscribe<OnAcornUnload>(Handler_OnAcornUnload);
+    }
+
     private void Handler_OnAcornUnload(OnAcornUnload unload)
     {
         _currentAcorn += unload.AcornNumber;

@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,13 @@ public class EndGameMenu : MonoBehaviour
         MessageBus.Subscribe<OnGameWin>(Handler_OnGameWin);
     }
 
+    void OnDestroy()
+    {
+        MessageBus.Unsubscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
+        MessageBus.Unsubscribe<OnOutOfTime>(Handler_OnOutOfTime);
+        MessageBus.Unsubscribe<OnGameWin>(Handler_OnGameWin);
+    }
+
     private void Handler_OnGameWin(OnGameWin win)
     {
         ShowWin();
@@ -33,19 +41,20 @@ public class EndGameMenu : MonoBehaviour
         ShowLoose(false);
     }
 
-    private void Handler_OnFoxBiteSquirrel(OnFoxBiteSquirrel squirrel)
+    private async void Handler_OnFoxBiteSquirrel(OnFoxBiteSquirrel squirrel)
     {
+        await UniTask.WaitForSeconds(0.2f);
         ShowLoose(true);
     }
 
     private void Handler_OnMenuClick()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MenuScene");
     }
 
     private void Handler_OnRetryClick()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene");
     }
 
     private void ShowWin()

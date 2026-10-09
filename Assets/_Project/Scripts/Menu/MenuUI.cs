@@ -16,7 +16,7 @@ public class MenuUI : MonoBehaviour
 
     private void Play()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene");
     }
     private void Setting()
     {
