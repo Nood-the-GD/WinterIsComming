@@ -46,6 +46,13 @@ public class Fox : MonoBehaviour
         _fov.OnTargetDetected += Handler_OnTargetDetected;
     }
 
+    void OnDestroy()
+    {
+        MessageBus.Unsubscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
+        MessageBus.Unsubscribe<OnOutOfTime>(Handler_OnOutOfTime);
+        MessageBus.Unsubscribe<OnGameWin>(Handler_OnGameWin);
+    }
+
     private void Handler_OnGameWin(OnGameWin win)
     {
         _canMove = false;
@@ -166,6 +173,7 @@ public class Fox : MonoBehaviour
             if (_currentStage == FoxStage.ChaseTarget)
             {
                 _currentStage = FoxStage.LooseTarget;
+                MessageBus.Publish<OnFoxLooseSquirrel>(new());
             }
             return;
         }
@@ -174,5 +182,6 @@ public class Fox : MonoBehaviour
         _moveTargetPoint = transform.position;
         _currentSpeed = _runSpeed;
         _currentStage = FoxStage.ChaseTarget;
+        MessageBus.Publish<OnFoxSeeSquirrel>(new());
     }
 }

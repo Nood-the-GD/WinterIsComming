@@ -6,4 +6,7 @@ public struct OnAcornUnload
 public struct OnOutOfTime { }
 
 public struct OnFoxBiteSquirrel { }
+public struct OnFoxSeeSquirrel { }
+public struct OnFoxLooseSquirrel { }
+
 public struct OnGameWin { }
