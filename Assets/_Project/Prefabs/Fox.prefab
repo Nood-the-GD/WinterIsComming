@@ -367,6 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c3b24ea752b41a9bb4e195294928ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::FieldOfView
+  _normalMat: {fileID: 2100000, guid: 12b88952edd9945569110a08d25ee029, type: 2}
+  _detectedMat: {fileID: 2100000, guid: 27ff96e90d8cd4f71ba528f57076cbfe, type: 2}
   _blockLayerMask:
     serializedVersion: 2
     m_Bits: 64

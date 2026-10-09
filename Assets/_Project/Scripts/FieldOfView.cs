@@ -6,9 +6,12 @@ using UnityEngine.Rendering;
 public class FieldOfView : MonoBehaviour
 {
     public Action<Transform> OnTargetDetected;
+
+    [SerializeField] private Material _normalMat, _detectedMat;
     [SerializeField] private LayerMask _blockLayerMask;
     [SerializeField] private LayerMask _targetLayerMask;
 
+    private MeshRenderer _meshRender;
     private float _fov = 60f;
     private Vector3 _origin = Vector3.zero;
     private float _angle = 0;
@@ -26,7 +29,9 @@ public class FieldOfView : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        _meshRender = GetComponent<MeshRenderer>();
         _angleIncrease = _fov / _rayCount;
+        _meshRender.material = _normalMat;
     }
 
     private void LateUpdate()
@@ -64,6 +69,7 @@ public class FieldOfView : MonoBehaviour
                         // Hit Target
                         OnTargetDetected?.Invoke(ray.transform);
                         detectTarget = true;
+                        _meshRender.material = _detectedMat;
                     }
                     else
                     {
@@ -89,6 +95,7 @@ public class FieldOfView : MonoBehaviour
 
         if (detectTarget == false)
         {
+            _meshRender.material = _normalMat;
             OnTargetDetected?.Invoke(null);
         }
 
