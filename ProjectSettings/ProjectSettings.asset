@@ -145,7 +145,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -394,7 +395,10 @@ PlayerSettings:
       m_Height: 1024
       m_Kind: 4
       m_SubKind: App Store
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: WebGL
+    m_StaticBatching: 0
+    m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []
@@ -415,7 +419,10 @@ PlayerSettings:
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding: []
-  m_BuildTargetDefaultTextureCompressionFormat: []
+  m_BuildTargetDefaultTextureCompressionFormat:
+  - serializedVersion: 3
+    m_BuildTarget: WebGL
+    m_Formats: 05000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -682,24 +689,25 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN
-    EmbeddedLinux: DOTWEEN
+    Android: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    EmbeddedLinux: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
     Kepler: DOTWEEN
-    LinuxHeadlessSimulation: DOTWEEN
-    Nintendo Switch: DOTWEEN
-    Nintendo Switch 2: DOTWEEN
-    PS4: DOTWEEN
-    PS5: DOTWEEN
-    QNX: DOTWEEN
-    Standalone: DOTWEEN
-    VisionOS: DOTWEEN
-    WebGL: DOTWEEN
-    Windows Store Apps: DOTWEEN
-    XboxOne: DOTWEEN
-    iPhone: DOTWEEN
-    tvOS: DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    Nintendo Switch: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    Nintendo Switch 2: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    PS4: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    PS5: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    QNX: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    Server: Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    Standalone: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    VisionOS: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    WebGL: DOTWEEN;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    Windows Store Apps: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    XboxOne: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    iPhone: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
+    tvOS: DOTWEEN;Module_Robot;Module_RobotJob;Module_StoreObject;Module_Sound
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

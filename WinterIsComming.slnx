@@ -17,7 +17,9 @@
   <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
   <Project Path="UniTask.TextMeshPro.csproj" />
   <Project Path="Lofelt.NiceVibrations.Editor.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
+  <Project Path="Game.Editor.csproj" />
   <Project Path="UniTask.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="UniTask.DOTween.csproj" />
