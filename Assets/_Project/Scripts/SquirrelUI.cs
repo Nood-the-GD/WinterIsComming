@@ -1,9 +1,11 @@
 using System;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 
 public class SquirrelUI : MonoBehaviour
 {
+
     [SerializeField] private TextMeshPro _acornText;
 
     [SerializeField] private Squirrel _squirrel;

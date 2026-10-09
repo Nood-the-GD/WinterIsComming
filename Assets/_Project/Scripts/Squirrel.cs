@@ -1,9 +1,13 @@
 using System;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Squirrel : MonoBehaviour
 {
+    [SerializeField] private MMF_Player _collectAcornFeedback;
+    [SerializeField] private MMF_Player _fullAcornFeedback;
+
     [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private InputActionReference _move;
     [SerializeField] private Rigidbody2D _rb;
@@ -25,6 +29,13 @@ public class Squirrel : MonoBehaviour
         MessageBus.Subscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
         MessageBus.Subscribe<OnGameWin>(Handler_OnGameWin);
         MessageBus.Subscribe<OnOutOfTime>(Handler_OnOutOfTime);
+    }
+
+    void OnDestroy()
+    {
+        MessageBus.Unsubscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
+        MessageBus.Unsubscribe<OnGameWin>(Handler_OnGameWin);
+        MessageBus.Unsubscribe<OnOutOfTime>(Handler_OnOutOfTime);
     }
 
     private void Handler_OnOutOfTime(OnOutOfTime time)
@@ -57,7 +68,12 @@ public class Squirrel : MonoBehaviour
     {
         if (collision.gameObject.tag == "Acorn")
         {
-            if (_currentAcorn >= _maxAcorn) return;
+            if (_currentAcorn >= _maxAcorn)
+            {
+                _fullAcornFeedback.PlayFeedbacks();
+                return;
+            }
+            _collectAcornFeedback.PlayFeedbacks();
             _currentAcorn++;
             if (collision.TryGetComponent<Acorn>(out Acorn acorn))
             {

@@ -1,9 +1,11 @@
 using System;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 
 public class MainTreeUI : MonoBehaviour
 {
+    [SerializeField] private MMF_Player _unloadAcornFeedback;
     [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private TextMeshPro _text;
     private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
@@ -18,6 +20,8 @@ public class MainTreeUI : MonoBehaviour
 
     private void Handler_OnAcornUnload(OnAcornUnload unload)
     {
+        if (unload.AcornNumber <= 0) return;
+        _unloadAcornFeedback.PlayFeedbacks();
         _currentAcorn += unload.AcornNumber;
         _text.text = $"{_currentAcorn}/{_setting.RequireAcorn}";
     }
