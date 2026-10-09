@@ -1,3 +1,4 @@
+using Core.SoundManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,11 +48,12 @@ public class SettingUI : MonoBehaviour
         {
             _globalSetting.IsSound = false;
         }
+        ServiceManager.Get<SoundManager>().SetGlobalSoundVolume(arg0 ? 1 : 0);
     }
 
     private void Handler_OnMusicToggleChange(bool arg0)
     {
-        if(arg0)
+        if (arg0)
         {
             _globalSetting.IsMusic = true;
         }
@@ -59,6 +61,8 @@ public class SettingUI : MonoBehaviour
         {
             _globalSetting.IsMusic = false;
         }
+
+        ServiceManager.Get<SoundManager>().SetGlobalMusicVolume(arg0 ? 1 : 0);
     }
 
     void OnEnable()

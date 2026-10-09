@@ -1,4 +1,5 @@
 using System;
+using Core.SoundManager;
 using UnityEngine;
 
 
@@ -139,6 +140,7 @@ public class Fox : MonoBehaviour
             if (Vector3.Distance(_targetTransform.position, this.transform.position) <= 0.2f)
             {
                 MessageBus.Publish<OnFoxBiteSquirrel>(new());
+                ServiceManager.Get<SoundManager>().PlaySound(SoundEnum.Bite);
             }
         }
 
@@ -174,6 +176,7 @@ public class Fox : MonoBehaviour
             {
                 _currentStage = FoxStage.LooseTarget;
                 MessageBus.Publish<OnFoxLooseSquirrel>(new());
+                ServiceManager.Get<SoundManager>().ChangeMusic(MusicEnum.BGM);
             }
             return;
         }
@@ -183,5 +186,6 @@ public class Fox : MonoBehaviour
         _currentSpeed = _runSpeed;
         _currentStage = FoxStage.ChaseTarget;
         MessageBus.Publish<OnFoxSeeSquirrel>(new());
+        ServiceManager.Get<SoundManager>().ChangeMusic(MusicEnum.Attack);
     }
 }

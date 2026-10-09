@@ -1,4 +1,5 @@
 using System;
+using Core.SoundManager;
 using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class MainTreeUI : MonoBehaviour
     private void Handler_OnAcornUnload(OnAcornUnload unload)
     {
         if (unload.AcornNumber <= 0) return;
+        ServiceManager.Get<SoundManager>().PlaySound(SoundEnum.Unload_acorn);
         _unloadAcornFeedback.PlayFeedbacks();
         _currentAcorn += unload.AcornNumber;
         _text.text = $"{_currentAcorn}/{_setting.RequireAcorn}";

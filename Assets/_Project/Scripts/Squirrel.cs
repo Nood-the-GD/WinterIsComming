@@ -1,4 +1,5 @@
 using System;
+using Core.SoundManager;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -71,10 +72,12 @@ public class Squirrel : MonoBehaviour
             if (_currentAcorn >= _maxAcorn)
             {
                 _fullAcornFeedback.PlayFeedbacks();
+                ServiceManager.Get<SoundManager>().PlaySound(SoundListEnum.Collect_acorn_error);
                 return;
             }
             _collectAcornFeedback.PlayFeedbacks();
             _currentAcorn++;
+            ServiceManager.Get<SoundManager>().PlaySound(SoundListEnum.Collect_acorn);
             if (collision.TryGetComponent<Acorn>(out Acorn acorn))
             {
                 acorn.OnAcornCollect?.Invoke();
