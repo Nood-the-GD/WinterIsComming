@@ -12,7 +12,9 @@ public class Squirrel : MonoBehaviour
     [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private InputActionReference _move;
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private WarmthController _warmthController;
     [SerializeField] private float _speed = 5;
+
     private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
 
     public Action OnCollectAcorn;
@@ -90,7 +92,16 @@ public class Squirrel : MonoBehaviour
         {
             MessageBus.Publish<OnAcornUnload>(new OnAcornUnload { AcornNumber = CurrentAcorn });
             _currentAcorn = 0;
+            _warmthController.SetIsOutSide(false);
             OnCollectAcorn?.Invoke();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MainTree")
+        {
+            _warmthController.SetIsOutSide(true);
         }
     }
 

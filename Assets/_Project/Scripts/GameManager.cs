@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private float _timer;
     private int _currentAcorn;
     private GameSetting _setting => _globalSetting.CurrentDifficultySetting;
+    private bool _isGameComplete;
 
 
     void Start()
@@ -16,12 +17,20 @@ public class GameManager : MonoBehaviour
         _timer = _limitTimeInSecond;
         MessageBus.Subscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
         MessageBus.Subscribe<OnAcornUnload>(Handler_OnAcornUnload);
+        MessageBus.Subscribe<OnOutOfWarmth>(Handler_OutOfWarm);
     }
 
     void OnDestroy()
     {
         MessageBus.Unsubscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
         MessageBus.Unsubscribe<OnAcornUnload>(Handler_OnAcornUnload);
+        MessageBus.Unsubscribe<OnOutOfWarmth>(Handler_OutOfWarm);
+    }
+
+    private void Handler_OutOfWarm(OnOutOfWarmth warmth)
+    {
+        Debug.Log("Game Loose");
+        _isGameComplete = true;
     }
 
     private void Handler_OnAcornUnload(OnAcornUnload unload)
@@ -32,15 +41,18 @@ public class GameManager : MonoBehaviour
             // Game Win
             Debug.Log("Game Win");
             MessageBus.Publish<OnGameWin>(new());
+            _isGameComplete = true;
         }
     }
 
     void Update()
     {
+        if (_isGameComplete) return;
         _timer -= Time.deltaTime;
         if (_timer <= 0)
         {
             // Out of time
+            _isGameComplete = true;
             MessageBus.Publish<OnOutOfTime>(new());
             // Game Loose
             Debug.Log("Game Loose");
@@ -50,6 +62,7 @@ public class GameManager : MonoBehaviour
     private void Handler_OnFoxBiteSquirrel(OnFoxBiteSquirrel squirrel)
     {
         // Game loose
+        _isGameComplete = true;
         Debug.Log("Game Loose");
     }
 }

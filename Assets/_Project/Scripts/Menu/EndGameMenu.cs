@@ -22,6 +22,7 @@ public class EndGameMenu : MonoBehaviour
         MessageBus.Subscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
         MessageBus.Subscribe<OnOutOfTime>(Handler_OnOutOfTime);
         MessageBus.Subscribe<OnGameWin>(Handler_OnGameWin);
+        MessageBus.Subscribe<OnOutOfWarmth>(Handler_OnOutOfWarmth);
     }
 
     void OnDestroy()
@@ -29,6 +30,12 @@ public class EndGameMenu : MonoBehaviour
         MessageBus.Unsubscribe<OnFoxBiteSquirrel>(Handler_OnFoxBiteSquirrel);
         MessageBus.Unsubscribe<OnOutOfTime>(Handler_OnOutOfTime);
         MessageBus.Unsubscribe<OnGameWin>(Handler_OnGameWin);
+        MessageBus.Unsubscribe<OnOutOfWarmth>(Handler_OnOutOfWarmth);
+    }
+
+    private void Handler_OnOutOfWarmth(OnOutOfWarmth warmth)
+    {
+        ShowLoose(false);
     }
 
     private void Handler_OnGameWin(OnGameWin win)

@@ -4,6 +4,7 @@ public struct OnAcornUnload
 }
 
 public struct OnOutOfTime { }
+public struct OnOutOfWarmth { }
 
 public struct OnFoxBiteSquirrel { }
 public struct OnFoxSeeSquirrel { }

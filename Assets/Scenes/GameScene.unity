@@ -3889,6 +3889,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb79edc685dc43a486f6d7ada4eea39, type: 3}
+--- !u!1 &1895490055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1895490056}
+  - component: {fileID: 1895490057}
+  m_Layer: 0
+  m_Name: WarmthController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1895490056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895490055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1895490057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895490055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc9947aa989c4094af560079c765444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::WarmthController
+  _maxWarmth: 100
+  _currentWarmth: 0
+  _warmthDecreaseSpeed: 3
+  _coldVolumeColor: {r: 0, g: 0.23333168, b: 1, a: 1}
+  _warmVolumeColor: {r: 1, g: 0.924858, b: 0, a: 1}
+  _normalVolumeColor: {r: 1, g: 1, b: 1, a: 1}
+  _minIntend: 0
+  _maxIntend: 0.5
+  _globalVolume: {fileID: 1037993581}
 --- !u!1 &1930402437
 GameObject:
   m_ObjectHideFlags: 0
@@ -5926,13 +5979,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel
       objectReference: {fileID: 0}
+    - target: {fileID: 6221383222129349914, guid: 0798c610d2d174c2fbf02a80736b1107, type: 3}
+      propertyPath: _warmthController
+      value: 
+      objectReference: {fileID: 1895490057}
     - target: {fileID: 6524415348849088382, guid: 0798c610d2d174c2fbf02a80736b1107, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.79
+      value: -1.33
       objectReference: {fileID: 0}
     - target: {fileID: 6524415348849088382, guid: 0798c610d2d174c2fbf02a80736b1107, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.68
+      value: -5.76
       objectReference: {fileID: 0}
     - target: {fileID: 6524415348849088382, guid: 0798c610d2d174c2fbf02a80736b1107, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9288,3 +9345,4 @@ SceneRoots:
   - {fileID: 1239932319}
   - {fileID: 1037993582}
   - {fileID: 957040684}
+  - {fileID: 1895490056}
