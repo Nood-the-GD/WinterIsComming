@@ -13,6 +13,9 @@ public class WarmthController : MonoBehaviour
     private bool _isEndGame;
     private bool _isOutSide;
 
+    public float CurrentWarmth => _currentWarmth;
+    public float MaxWarmth => _maxWarmth;
+
     void Start()
     {
         _isEndGame = false;
