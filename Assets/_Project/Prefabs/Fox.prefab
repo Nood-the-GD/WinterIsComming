@@ -171,7 +171,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _limitX: {x: -10, y: 10}
-  _limitY: {x: -5, y: 5}
+  _limitY: {x: -2, y: 5}
   _questionMark: {fileID: 7346626548026160872}
 --- !u!1 &7721015536911870540
 GameObject:
