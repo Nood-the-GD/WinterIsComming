@@ -7,12 +7,11 @@ public class Init : MonoBehaviour
     {
         ServiceManager.Init();
         MessageBus.Init();
-
+        ServiceManager.Register<SoundManager>();
     }
 
     void Start()
     {
-        ServiceManager.Register<SoundManager>();
         ServiceManager.Get<SoundManager>().PlayMusic(MusicEnum.BGM);
     }
 }
