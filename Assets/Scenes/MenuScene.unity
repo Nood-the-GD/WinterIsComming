@@ -2615,6 +2615,7 @@ MonoBehaviour:
   _settingBtn: {fileID: 1058775435}
   _quitBtn: {fileID: 974657303}
   _settingPanel: {fileID: 806639105}
+  _globalSetting: {fileID: 11400000, guid: d5584afc9e0e5402ca8d1cb8aa08a247, type: 2}
 --- !u!1 &1367547771
 GameObject:
   m_ObjectHideFlags: 0
