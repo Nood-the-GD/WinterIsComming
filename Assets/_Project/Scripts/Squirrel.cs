@@ -11,6 +11,7 @@ public class Squirrel : MonoBehaviour
 
     [SerializeField] private GlobalSetting _globalSetting;
     [SerializeField] private InputActionReference _move;
+    [SerializeField] private InputActionReference _enter;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private WarmthController _warmthController;
     [SerializeField] private float _speed = 5;
@@ -23,9 +24,12 @@ public class Squirrel : MonoBehaviour
     private int _currentAcorn;
     private int _maxAcorn => _setting.MaxAcornCanCarry;
     private bool _canMove = true;
+    private bool _isInNest = false;
+    private MainTree _mainTree;
 
     public int CurrentAcorn => _currentAcorn;
     public int MaxAcorn => _maxAcorn;
+    public Vector3 MoveDirection => _moveDirection;
 
     void Start()
     {
@@ -65,6 +69,25 @@ public class Squirrel : MonoBehaviour
         }
         _moveDirection = _move.action.ReadValue<Vector2>();
         _moveDirection = Vector3.Normalize(_moveDirection);
+        if (_enter.action.triggered && _mainTree != null)
+        {
+            if (_isInNest == false)
+            {
+                var nestPos = _mainTree.NestTrans.position;
+                this.transform.position = nestPos;
+                _warmthController.SetIsOutSide(false);
+                _isInNest = true;
+                _move.action.Disable();
+            }
+            else
+            {
+                var offPos = _mainTree.OffTrans.position;
+                this.transform.position = offPos;
+                _warmthController.SetIsOutSide(true);
+                _move.action.Enable();
+                _isInNest = false;
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -92,8 +115,8 @@ public class Squirrel : MonoBehaviour
         {
             MessageBus.Publish<OnAcornUnload>(new OnAcornUnload { AcornNumber = CurrentAcorn });
             _currentAcorn = 0;
-            _warmthController.SetIsOutSide(false);
             OnCollectAcorn?.Invoke();
+            _mainTree = collision.GetComponent<MainTree>();
         }
     }
 
@@ -101,9 +124,11 @@ public class Squirrel : MonoBehaviour
     {
         if (collision.gameObject.tag == "MainTree")
         {
+            _mainTree = null;
             _warmthController.SetIsOutSide(true);
         }
     }
+
 
     void FixedUpdate()
     {
